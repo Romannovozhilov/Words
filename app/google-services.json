@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "444259990453",
+    "firebase_url": "https://word-of-day-e8372.firebaseio.com",
+    "project_id": "word-of-day-e8372",
+    "storage_bucket": "word-of-day-e8372.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:444259990453:android:6147e7a223c50b81",
+        "android_client_info": {
+          "package_name": "ru.moogen.words"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "444259990453-nvj2s0mt0nf51hrer1comdjfg6kvu829.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ru.moogen.words",
+            "certificate_hash": "e431c1ac982fa0cad0dd70d333318ba2f79e57c2"
+          }
+        },
+        {
+          "client_id": "444259990453-ubrkl6tedik5v687saimo525iq3dkhel.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyMBXshZ8L012Diy_I1u78k2kF7Blngf4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "444259990453-ubrkl6tedik5v687saimo525iq3dkhel.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
