@@ -1,5 +1,6 @@
 package ru.moogen.words;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -62,8 +63,24 @@ public class PageFragment extends Fragment {
                     mWord.setFavourite(!mWord.isFavourite());
                     if (mWord.isFavourite()) {
                         mFloatingActionButton.setImageResource(R.drawable.star_on);
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                SQLiteDatabase sqLiteDatabase = MainActivity.mDataHelperFromCSV.getWritableDatabase();
+                                sqLiteDatabase.execSQL("UPDATE words SET favourite = 1 WHERE _id=" + mWord.getId());
+                                }
+                        }).start();
+
                     } else {
                         mFloatingActionButton.setImageResource(R.drawable.star_off);
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                SQLiteDatabase sqLiteDatabase = MainActivity.mDataHelperFromCSV.getWritableDatabase();
+                                sqLiteDatabase.execSQL("UPDATE words SET favourite = 0 WHERE _id=" + mWord.getId());
+                            }
+                        }).start();
+
                     }
                 }
             });

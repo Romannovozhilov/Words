@@ -14,7 +14,7 @@ import java.util.GregorianCalendar;
 
 public class MainActivity extends AppCompatActivity {
 
-    DataHelperFromCSV mDataHelperFromCSV;
+    public static DataHelperFromCSV mDataHelperFromCSV;
     int todayPosition;
     long today;
     ViewPager mPager;
