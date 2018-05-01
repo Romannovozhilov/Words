@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     DataHelperFromCSV mDataHelperFromCSV;
     int todayPosition;
     long today;
+    ViewPager mPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +45,9 @@ public class MainActivity extends AppCompatActivity {
           }
 
 
-        ViewPager pager=findViewById(R.id.pager);
-        pager.setAdapter(new MyAdapter(getSupportFragmentManager(), list));
-        pager.setCurrentItem(todayPosition);
+        mPager = findViewById(R.id.pager);
+        mPager.setAdapter(new MyAdapter(getSupportFragmentManager(), list));
+        mPager.setCurrentItem(todayPosition);
 
 
 
