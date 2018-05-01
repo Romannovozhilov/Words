@@ -67,7 +67,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void randomWord(MenuItem m){
-        int randPosition = (int)(Math.random() * (mList.size() - 1));
+        int randPosition;
+        do {
+            randPosition = (int)(Math.random() * (mList.size() - 1));
+        } while(randPosition == mPager.getCurrentItem());
         mPager.setCurrentItem(randPosition);
     }
 
