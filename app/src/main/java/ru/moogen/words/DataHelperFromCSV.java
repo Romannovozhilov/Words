@@ -66,9 +66,9 @@ public class DataHelperFromCSV extends SQLiteOpenHelper{
         onCreate(db);
         }
 
-    public static void main(String[] args) {
-
-    }
+//    public static void main(String[] args) {
+//
+//    }
 
     public ArrayList<Word> getWordList (SQLiteDatabase db){
         GregorianCalendar gregorianCalendar = new GregorianCalendar();

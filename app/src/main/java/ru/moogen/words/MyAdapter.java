@@ -20,6 +20,6 @@ public class MyAdapter extends FragmentPagerAdapter {
     }
     @Override
     public Fragment getItem(int position) {
-        return(PageFragment.newInstance(wordsList.get(position)));
+        return(PageFragment.newInstance(wordsList.get(position), wordsList.size(), position));
     }
 }
