@@ -73,10 +73,10 @@ public class DataHelperFromCSV extends SQLiteOpenHelper{
     public ArrayList<Word> getWordList (SQLiteDatabase db){
         GregorianCalendar gregorianCalendar = new GregorianCalendar();
         gregorianCalendar.set(Calendar.MILLISECOND, 0);
-        gregorianCalendar.set(Calendar.HOUR, 0);
+        gregorianCalendar.set(Calendar.HOUR_OF_DAY, 0);
         gregorianCalendar.set(Calendar.MINUTE, 0);
         gregorianCalendar.set(Calendar.SECOND, 0);
-        System.out.println("gregcal - " + gregorianCalendar.getTime().getTime());
+//        System.out.println("gregcal - " + gregorianCalendar.getTime());
         ArrayList<Word> resultList = new ArrayList<>();
         String[] sel = {COLUMN_ID, COLUMN_NAME, COLUMN_DESCRIPTION, COLUMN_DATE, COLUMN_FAVOURITE};
         Cursor cursor = db.query(TABLE_WORDS_NAME, sel, null, null, null, null, null);
@@ -84,6 +84,9 @@ public class DataHelperFromCSV extends SQLiteOpenHelper{
         while(!cursor.isAfterLast()){
 
             long date = cursor.getLong(cursor.getColumnIndex(COLUMN_DATE));
+//            System.out.println(new Date(date));
+//            System.out.println(date);
+//            System.out.println(gregorianCalendar.getTime().getTime());
             if (date <= gregorianCalendar.getTime().getTime()) {
                 String name = cursor.getString(cursor.getColumnIndex(COLUMN_NAME));
                 int id = cursor.getInt(cursor.getColumnIndex(COLUMN_ID));

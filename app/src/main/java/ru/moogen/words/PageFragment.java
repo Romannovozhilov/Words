@@ -37,6 +37,7 @@ public class PageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        setRetainInstance(true);
         View result=inflater.inflate(R.layout.fragment_page, container, false);
         TextView pageHeader=result.findViewById(R.id.nameText);
         pageHeader.setText(mWord.getName());

@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     int todayPosition;
     long today;
     ViewPager mPager;
+    ArrayList<Word> mList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,11 +25,11 @@ public class MainActivity extends AppCompatActivity {
 
         mDataHelperFromCSV = new DataHelperFromCSV(this);
         SQLiteDatabase sqLiteDatabase = mDataHelperFromCSV.getWritableDatabase();
-        ArrayList<Word> list = mDataHelperFromCSV.getWordList(sqLiteDatabase);
+        mList = mDataHelperFromCSV.getWordList(sqLiteDatabase);
 
         GregorianCalendar gregorianCalendar = new GregorianCalendar();
         gregorianCalendar.set(Calendar.MILLISECOND, 0);
-        gregorianCalendar.set(Calendar.HOUR, 0);
+        gregorianCalendar.set(Calendar.HOUR_OF_DAY, 0);
         gregorianCalendar.set(Calendar.MINUTE, 0);
         gregorianCalendar.set(Calendar.SECOND, 0);
 
@@ -36,9 +37,9 @@ public class MainActivity extends AppCompatActivity {
         System.out.println(gregorianCalendar.getTime().getTime());
         today = gregorianCalendar.getTime().getTime();
         System.out.println(today);
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println("list date - " + list.get(i).getDate());
-            if (today == list.get(i).getDate()){
+        for (int i = 0; i < mList.size(); i++) {
+//            System.out.println("list date - " + mList.get(i).getDate());
+            if (today == mList.get(i).getDate()){
                 todayPosition = i;
                 break;
             }
@@ -46,15 +47,16 @@ public class MainActivity extends AppCompatActivity {
 
 
         mPager = findViewById(R.id.pager);
-        mPager.setAdapter(new MyAdapter(getSupportFragmentManager(), list));
+        mPager.setAdapter(new MyAdapter(getSupportFragmentManager(), mList));
         mPager.setCurrentItem(todayPosition);
 
 
 
-//        ArrayList<String> list2 = new DataHelperFromCSV(this).loadFromFile();
-//        for (int i = 0; i < list2.size(); i++) {
-//            System.out.println("fdfsdf    " + list2.get(i));
-//        }
-
     }
+
+    private void randomWord(){
+        int randPosition = (int)(Math.random() * (mList.size()));
+        mPager.setCurrentItem(randPosition);
+    }
+
 }
