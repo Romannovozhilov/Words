@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Words</string>
+    <string name="rand_menu_title">Случайное слово</string>
 </resources>

@@ -4,6 +4,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -22,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 
         mDataHelperFromCSV = new DataHelperFromCSV(this);
         SQLiteDatabase sqLiteDatabase = mDataHelperFromCSV.getWritableDatabase();
@@ -54,9 +58,16 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void randomWord(){
-        int randPosition = (int)(Math.random() * (mList.size()));
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.ab_menu, menu);
+        return true;
+    }
+
+    public void randomWord(MenuItem m){
+        int randPosition = (int)(Math.random() * (mList.size() - 1));
         mPager.setCurrentItem(randPosition);
     }
+
 
 }
