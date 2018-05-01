@@ -71,12 +71,11 @@ public class DataHelperFromCSV extends SQLiteOpenHelper{
 //    }
 
     public ArrayList<Word> getWordList (SQLiteDatabase db){
-        GregorianCalendar gregorianCalendar = new GregorianCalendar();
-        gregorianCalendar.set(Calendar.MILLISECOND, 0);
-        gregorianCalendar.set(Calendar.HOUR_OF_DAY, 0);
-        gregorianCalendar.set(Calendar.MINUTE, 0);
-        gregorianCalendar.set(Calendar.SECOND, 0);
-//        System.out.println("gregcal - " + gregorianCalendar.getTime());
+        Date todayDate = new Date();
+
+        GregorianCalendar todayCal = new GregorianCalendar();
+        todayCal.setTime(todayDate);
+
         ArrayList<Word> resultList = new ArrayList<>();
         String[] sel = {COLUMN_ID, COLUMN_NAME, COLUMN_DESCRIPTION, COLUMN_DATE, COLUMN_FAVOURITE};
         Cursor cursor = db.query(TABLE_WORDS_NAME, sel, null, null, null, null, null);
@@ -84,10 +83,15 @@ public class DataHelperFromCSV extends SQLiteOpenHelper{
         while(!cursor.isAfterLast()){
 
             long date = cursor.getLong(cursor.getColumnIndex(COLUMN_DATE));
-//            System.out.println(new Date(date));
-//            System.out.println(date);
-//            System.out.println(gregorianCalendar.getTime().getTime());
-            if (date <= gregorianCalendar.getTime().getTime()) {
+            Date wordDate = new Date(date);
+
+            GregorianCalendar wordCal = new GregorianCalendar();
+            wordCal.setTime(wordDate);
+
+            if (wordDate.getYear() < todayDate.getYear()) {
+
+
+                //--------------------------------------------------------------------
                 String name = cursor.getString(cursor.getColumnIndex(COLUMN_NAME));
                 int id = cursor.getInt(cursor.getColumnIndex(COLUMN_ID));
                 String description = cursor.getString(cursor.getColumnIndex(COLUMN_DESCRIPTION));
@@ -96,6 +100,33 @@ public class DataHelperFromCSV extends SQLiteOpenHelper{
 
                 Word word = new Word(id, date, name, description, favourite);
                 resultList.add(word);
+                //-----------------------------------------------------------------------
+
+
+            } else if (wordDate.getYear() == todayDate.getYear()){
+
+                if (wordDate.getMonth() < todayDate.getMonth()){
+                    String name = cursor.getString(cursor.getColumnIndex(COLUMN_NAME));
+                    int id = cursor.getInt(cursor.getColumnIndex(COLUMN_ID));
+                    String description = cursor.getString(cursor.getColumnIndex(COLUMN_DESCRIPTION));
+                    int fav = cursor.getInt(cursor.getColumnIndex(COLUMN_FAVOURITE));
+                    boolean favourite = fav == 1;
+
+                    Word word = new Word(id, date, name, description, favourite);
+                    resultList.add(word);
+
+                } else if (wordDate.getMonth() == todayDate.getMonth()){
+                    if (wordCal.get(Calendar.DAY_OF_MONTH) <= todayCal.get(Calendar.DAY_OF_MONTH)){
+                        String name = cursor.getString(cursor.getColumnIndex(COLUMN_NAME));
+                        int id = cursor.getInt(cursor.getColumnIndex(COLUMN_ID));
+                        String description = cursor.getString(cursor.getColumnIndex(COLUMN_DESCRIPTION));
+                        int fav = cursor.getInt(cursor.getColumnIndex(COLUMN_FAVOURITE));
+                        boolean favourite = fav == 1;
+
+                        Word word = new Word(id, date, name, description, favourite);
+                        resultList.add(word);
+                    }
+                }
             }
             cursor.moveToNext();
         }

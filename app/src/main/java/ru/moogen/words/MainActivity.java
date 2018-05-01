@@ -31,19 +31,21 @@ public class MainActivity extends AppCompatActivity {
         SQLiteDatabase sqLiteDatabase = mDataHelperFromCSV.getWritableDatabase();
         mList = mDataHelperFromCSV.getWordList(sqLiteDatabase);
 
-        GregorianCalendar gregorianCalendar = new GregorianCalendar();
-        gregorianCalendar.set(Calendar.MILLISECOND, 0);
-        gregorianCalendar.set(Calendar.HOUR_OF_DAY, 0);
-        gregorianCalendar.set(Calendar.MINUTE, 0);
-        gregorianCalendar.set(Calendar.SECOND, 0);
+        Date todayDate = new Date();
 
 
-        System.out.println(gregorianCalendar.getTime().getTime());
-        today = gregorianCalendar.getTime().getTime();
-        System.out.println(today);
         for (int i = 0; i < mList.size(); i++) {
-//            System.out.println("list date - " + mList.get(i).getDate());
-            if (today == mList.get(i).getDate()){
+            Date wordDate = new Date(mList.get(i).getDate());
+
+            GregorianCalendar todayCal = new GregorianCalendar();
+            todayCal.setTime(todayDate);
+
+            GregorianCalendar wordCal = new GregorianCalendar();
+            wordCal.setTime(wordDate);
+
+
+            if (wordDate.getYear() == todayDate.getYear() && wordDate.getMonth() == todayDate.getMonth()
+                    && todayCal.get(Calendar.DAY_OF_MONTH) == wordCal.get(Calendar.DAY_OF_MONTH)){
                 todayPosition = i;
                 break;
             }
